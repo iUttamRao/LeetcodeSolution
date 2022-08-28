@@ -1,28 +1,20 @@
 class Solution {
     public int canCompleteCircuit(int[] gas, int[] cost) {
-        if(gas.length==0){
-		return -1;
-	    }
-			   	
-        if(gas.length==1){
-            return gas[0]-cost[0]<0?-1:0;
+         int n = gas.length;
+        int index = 0;
+        int minSpace = Integer.MAX_VALUE;
+        int spare = 0;
+        
+        for (int i = 0; i < n; i++){
+            spare += gas[i] - cost[i];
+            
+            if(spare < minSpace){
+                index = i;
+                minSpace = spare;
+            }
         }
-        int start = 0;
-	    int end = 1;
-        int curr= gas[0]-cost[0];
-        while(start!=end) {
-	     while(curr<0 && start!=end) {
-		 curr= curr- (gas[start]-cost[start]);
-		 start = (start+1)%gas.length;
-		 if(start==0)
-		    return -1;
-	      }
-	     curr+= gas[end]-cost[end];
-	     end = (end+1)%gas.length;
-	 }
-	   if(curr<0)
-	      return -1;
-	   return start;
+        
+        return spare < 0 ? -1 : (index + 1) % n; 
         
     }
 }
