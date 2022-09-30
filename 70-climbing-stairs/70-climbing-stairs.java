@@ -1,7 +1,7 @@
 class Solution {
     public int climbStairs(int n) {
         int cache[] = new int[n+1];
-        if(n==0 || n==1){
+        if(n==1){
             return n;
         }
         cache[1]=1;
