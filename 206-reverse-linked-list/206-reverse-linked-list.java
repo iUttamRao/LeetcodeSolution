@@ -8,6 +8,8 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+
+// On the basis of Data
 class Solution {
     private int len(ListNode head){
         ListNode temp = head;
@@ -25,18 +27,35 @@ class Solution {
         }
         return temp;
     }
+    // public ListNode reverseList(ListNode head) {
+    //     int i=0;
+    //     int j=len(head)-1;
+    //     while(i<j){
+    //         ListNode leftNode=getNode(i,head);
+    //         ListNode rightNode=getNode(j,head);
+    //         int temp=leftNode.val;
+    //         leftNode.val=rightNode.val;
+    //         rightNode.val=temp;
+    //         i++;
+    //         j--;
+    //     }
+    //     return head;
+    // }
     public ListNode reverseList(ListNode head) {
-        int i=0;
-        int j=len(head)-1;
-        while(i<j){
-            ListNode leftNode=getNode(i,head);
-            ListNode rightNode=getNode(j,head);
-            int temp=leftNode.val;
-            leftNode.val=rightNode.val;
-            rightNode.val=temp;
-            i++;
-            j--;
+        if(head==null){
+            return head;
         }
+        ListNode prev = head;
+        ListNode current = prev.next;
+        while(current!=null){
+            ListNode ahead = current.next;
+            current.next=prev;
+            prev=current;
+            current=ahead;
+        }
+        ListNode temp = head;
+        head = prev;
+        temp.next=null;
         return head;
     }
 }
